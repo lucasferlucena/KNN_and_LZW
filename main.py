@@ -6,6 +6,7 @@ Created on Fri Feb 14 22:17:58 2020
 """
 from knn.KNNClassificator import KNNClassificator
 import copy
+import time
 
 def openImages():
     images= []
@@ -20,17 +21,20 @@ def openImages():
 
 
 def main():
-    knn = KNNClassificator()
-    print("Carregar Imagens")
-    images = openImages()
-    train = copy.deepcopy(images)
-    print("Dividir entre Treino e Teste")
-    test, label = knn.crossValidation(train)
-    print("Treinar Modelo")
-    knn.fit(train, 9)
-    print("Prever Categoria de Imagens")
-    knn.predict(test,label,9)
-    print("Fim")
+    for i in range(9,17):
+        start_time = time.time()
+        knn = KNNClassificator()
+        print("Carregar Imagens")
+        images = openImages()
+        train = copy.deepcopy(images)
+        print("Dividir entre Treino e Teste")
+        test, label = knn.crossValidation(train)
+        print("Treinar Modelo")
+        knn.fit(train, i)
+        print("Prever Categoria de Imagens")
+        knn.predict(test,label,i)
+        print("Fim")
+        print("---K = "+str(i)+" %s segundos ---" % (time.time() - start_time))
     
     
 if __name__ =="__main__":

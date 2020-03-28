@@ -19,6 +19,7 @@ class KNNClassificator():
 
     def fit(self, images, k):
         self.state = 0   
+        print("Treino K = "+ str(k))
 
         for category in range(len(images)):
             print("Treinamento Pessoa :" +str(category+1))
@@ -33,8 +34,8 @@ class KNNClassificator():
 
         for person in range(len(images)):
             compressionRates = []
+            print("Predict pessoa:"+str(person+1))
             for category in range(len(self.dicionario)):
-                print("pessoa:"+str(person+1)+" dicionario:"+str(category+1))
                 compressionRates.append(self.LZWCompression(images[person], k, self.dicionario[category]))                
             
             predictions.append(compressionRates.index(sorted(compressionRates)[0]))
@@ -43,9 +44,9 @@ class KNNClassificator():
         for i in range(len(label)):
             if label[i] == predictions[i]:
                 count += 1
-            print ("Imagem da pessoa["+str(label[i]+1)+"] previu como sendo da pessoa ["+str(predictions[i]+1)+"]")
+            #print ("Imagem da pessoa["+str(label[i]+1)+"] previu como sendo da pessoa ["+str(predictions[i]+1)+"]")
         
-        print("Acertou "+ str(count*100/len(label)) + "%")
+        print("Acertou "+ str(count*100/len(label)) + "%" + " com K = " + str(k))
 
 
 
