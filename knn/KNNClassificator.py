@@ -132,9 +132,3 @@ class KNNClassificator():
             firstRound = False
         
         return len(indice)
- 
-
- pessoa 3
- 2000, 3000, 12000000, 5000,.....
-
- pe
