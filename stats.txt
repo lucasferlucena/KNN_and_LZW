@@ -1,0 +1,38 @@
+Acertou 25.0% com K = 9
+Fim
+---K = 9 729.32359790802 segundos ---			12 minutos 	e 	9 segundos
+
+
+Acertou 10.0% com K = 10
+Fim
+---K = 10 1263.432009935379 segundos ---		21 minutos 	e 	3 segundos
+
+
+Acertou 22.5% com K = 11
+Fim
+---K = 11 2427.686170578003 segundos ---		40 minutos	e 	27 segundos
+
+
+Acertou 32.5% com K = 12
+Fim
+---K = 12 4688.201672792435 segundos ---	1 hora	18 minutos 	e 	7 segundos
+
+
+Acertou 62.5% com K = 13
+Fim
+---K = 13 10964.85316491127 segundos ---	3 horas 2 minutos 	e	44 segundos
+
+
+Acertou 77.5% com K = 14
+Fim
+---K = 14 15505.418677091599 segundos ---	4 horas 18 minutos	e 	25 segundos
+
+
+Acertou 82.5% com K = 15
+Fim
+---K = 15 27289.821514844894 segundos ---	7 horas 36 minutos	e	50 segundos
+
+
+Acertou 95.0% com K = 16
+Fim
+---K = 16 36743.034652233124 segundos ---	10 horas 12 minutos 	e 	22 segundos

@@ -9,43 +9,52 @@ import copy
 
 class KNNClassificator():
     def __init__(self):
+        #Inicializa todos os Dicionário das 40 Classes com a tabela ASCII
         ascii_table = {}
         for i in range(256):
             ascii_table[i] = bytes([ord(chr(i))])
 
         self.dicionario = [copy.deepcopy(ascii_table) for _ in range(40)]
+        #Inicializa o State [0 Significa que o dicionário pode ser alterado | 1 Significa que não]
         self.state = 0        
 
 
     def fit(self, images, k):
+        #Primeiramente, define que o state como 0, para que o dicionário possa ser alterado
         self.state = 0   
         print("Treino K = "+ str(k))
+        #No primeiro for é escolhido uma pessoa por vez
+        for person in range(len(images)):
+            print("Treinamento Pessoa :" +str(person+1))
+            #E em seguida é selecionado uma imagem por vez desse pessoa
+            for image in range(len(images[person])):
+                #E cada imagem é comprimida para alimentar um único dicionário pertencente a esta pessoa
+                self.LZWCompression(images[person][image], k, self.dicionario[person])
 
-        for category in range(len(images)):
-            print("Treinamento Pessoa :" +str(category+1))
-            for person in range(len(images[category])):
-                self.LZWCompression(images[category][person], k, self.dicionario[category])
 
-
-    def predict(self, images, label, k):        
+    def predict(self, images, label, k):   
+        #Primeiramente, define que o state como 1, para que o dicionário não possa ser alterado, se mantendo estático
         self.state = 1 
         
         predictions = []
-
+        #Selecionamos cada uma das pessoas 
         for person in range(len(images)):
             compressionRates = []
             print("Predict pessoa:"+str(person+1))
+            #E então comprimimos ela com cada um dos dicionários já calculados no durante o treino
             for category in range(len(self.dicionario)):
+                #E salvamos cada um dos resultados obtidos a cada dicionario em uma lista
                 compressionRates.append(self.LZWCompression(images[person], k, self.dicionario[category]))                
             
+            #No final selecionamos o resultado com a menor quantidade de indices nesta lista final com o predict de cada pessoa
             predictions.append(compressionRates.index(sorted(compressionRates)[0]))
 
         count = 0
         for i in range(len(label)):
+            #comparamos o predict com o ground truth
             if label[i] == predictions[i]:
                 count += 1
-            #print ("Imagem da pessoa["+str(label[i]+1)+"] previu como sendo da pessoa ["+str(predictions[i]+1)+"]")
-        
+        #E com base na comparação anterior, calculamos a acurácia
         print("Acertou "+ str(count*100/len(label)) + "%" + " com K = " + str(k))
 
 
@@ -55,10 +64,12 @@ class KNNClassificator():
         label = []
 
         for i in range(len(images)):
+            #Escolhe aleatoriamente uma das imagens de cada pessoa
             index = random.choice(range(len(images[i])))
+            #E divide entre treino(images) e teste(randomImages)
             randomImages.append(images[i].pop(index))
             label.append(i)
-        
+  
         return randomImages, label
 
 
@@ -122,3 +133,8 @@ class KNNClassificator():
         
         return len(indice)
  
+
+ pessoa 3
+ 2000, 3000, 12000000, 5000,.....
+
+ pe
